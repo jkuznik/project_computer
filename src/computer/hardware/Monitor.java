@@ -1,6 +1,6 @@
-package computer;
+package computer.hardware;
 
-public class Monitor {
+public class Monitor implements Components{
     private final String name;
     private int width;
     private int height;
@@ -22,5 +22,15 @@ public class Monitor {
     }
     public String getResolution(){
         return width + "x" + height;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public ComponentType getType() {
+        return ComponentType.MONITOR;
     }
 }

@@ -1,12 +1,19 @@
-package computer.drive;
+package computer.hardware.drive;
 
-import computer.file.File;
+import computer.hardware.ComponentType;
+import computer.software.file.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class SSDDrive implements Drive{
+    String name;
     Map<String, File> files =new HashMap<>();
+
+    public SSDDrive(String name) {
+        this.name = name;
+    }
+
     @Override
     public void addFile(File file) {
         files.put(file.getName(), file);
@@ -23,5 +30,15 @@ public class SSDDrive implements Drive{
     @Override
     public File findFile(String fileName) {
         return files.get(fileName);
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public ComponentType getType() {
+        return ComponentType.DRIVE;
     }
 }

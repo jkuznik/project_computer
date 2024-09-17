@@ -8,67 +8,70 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Computer {
-    private Monitor monitor;
-    private Drive drive;
-    private Headphones headphones;
+    List<Components> components = new ArrayList<>();
 
-    List<USBDevice> usbDevices = new ArrayList<>();
-
-    public Monitor getMonitor() {
-        return monitor;
+    public Computer(Monitor monitor, Drive drive) {
+        components.add(monitor);
+        components.add(drive);
     }
 
-    public void setMonitor(Monitor monitor) {
-        this.monitor = monitor;
+    public Monitor getMonitor() {
+        for (Components component : components) {
+            if (component instanceof Monitor) {
+                return (Monitor) component;
+            }
+        }
+        throw new RuntimeException("No component found");
     }
 
     public Drive getDrive() {
-        return drive;
-    }
-
-    public void setDrive(Drive drive) {
-        this.drive = drive;
+        for (Components component : components) {
+            if (component instanceof Drive) {
+                return (Drive) component;
+            }
+        }
+        throw new RuntimeException("No component found");
     }
 
     public Headphones getHeadphones() {
-        return headphones;
+        for (Components component : components) {
+            if (component instanceof Headphones) {
+                return (Headphones) component;
+            }
+        }
+        throw new RuntimeException("No component found");
     }
 
-    public void setHeadphones(Headphones headphones) {
-        this.headphones = headphones;
-    }
-
-    public List<USBDevice> getUsbDevices() {
+    public List<USBDevice> getUSBDevices() {
+        List<USBDevice> usbDevices = new ArrayList<>();
+        for (Components component : components) {
+            if (component instanceof USBDevice) {
+                usbDevices.add((USBDevice) component);
+            }
+        }
         return usbDevices;
     }
 
-//    public void addUSBDevice(USBDevice usbDevice){
-//        boolean isConnected = usbDevice.connect();
-//        if (isConnected){
-//            usbDevices.add(usbDevice);
-//        }
-//
-//    }
-//    public void removeUSBDevice(USBDevice usbDevice){
-//        boolean isDisconnected = usbDevice.disconnect();
-//        if (!isDisconnected) {
-//            System.out.println("USB device forcefully removed");
-//        }
-//        usbDevices.remove(usbDevice);
-//
-//    }
-
-    public Computer(Monitor monitor, Drive drive) {
-        this.monitor = monitor;
-        this.drive = drive;
+    public void addComponent(Components component) {
+        components.add(component);
     }
+
+    public void removeComponent(Components component){
+        components.remove(component);
+    }
+
     public void addFile(File file){
+        var drive = getDrive();
+        components.remove(drive);
         drive.addFile(file);
+        components.add(drive);
     }
     public void listFiles(){
+        var drive = getDrive();
         drive.listFiles();
     }
     public File findFile(String fileName){
+        var drive = getDrive();
         return drive.findFile(fileName);
     }
 }

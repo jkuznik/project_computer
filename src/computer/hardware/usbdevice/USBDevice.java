@@ -25,11 +25,11 @@ public abstract class USBDevice implements Components {
 
     @Override
     public String getName() {
-        return "";
+        return name;
     }
 
     @Override
     public ComponentType getType() {
-        return null;
+        return ComponentType.USB;
     }
 }

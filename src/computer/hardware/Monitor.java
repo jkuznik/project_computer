@@ -1,4 +1,4 @@
-package computer;
+package computer.hardware;
 
 public class Monitor {
     private final String name;

@@ -1,17 +1,14 @@
 package computer;
 
-import computer.drive.Drive;
-import computer.drive.HDDDrive;
-import computer.drive.SSDDrive;
-import computer.file.File;
-import computer.file.image.GIFImageFile;
-import computer.file.image.JPGImageFIle;
-import computer.file.music.MP3File;
-import computer.usbdevice.MemoryStick;
-import computer.usbdevice.Mouse;
-import computer.usbdevice.USBDevice;
+import computer.hardware.Computer;
+import computer.hardware.drive.Drive;
+import computer.hardware.drive.HDDDrive;
+import computer.software.file.File;
+import computer.software.file.image.GIFImageFile;
+import computer.software.file.image.JPGImageFIle;
+import computer.software.file.music.MP3File;
+import computer.hardware.Monitor;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -22,7 +19,7 @@ public class Main {
         Computer computer = new Computer(monitor, hddDrive);
 
 
-//        ssdDrive.addFile(new computer.file.File("photo.jpg"));
+//        ssdDrive.addFile(new computer.software.file.File("photo.jpg"));
 //        ssdDrive.listFiles();
 
 //        computer.addFile(new File("file.png"));

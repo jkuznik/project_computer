@@ -1,8 +1,8 @@
-package computer;
+package computer.hardware;
 
-import computer.drive.Drive;
-import computer.file.File;
-import computer.usbdevice.USBDevice;
+import computer.hardware.drive.Drive;
+import computer.software.file.File;
+import computer.hardware.usbdevice.USBDevice;
 
 import java.util.ArrayList;
 import java.util.List;

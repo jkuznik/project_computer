@@ -1,4 +1,4 @@
-package computer.usbdevice;
+package computer.hardware.usbdevice;
 
 public class MemoryStick implements USBDevice{
     private final String name;

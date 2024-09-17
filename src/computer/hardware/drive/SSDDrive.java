@@ -1,6 +1,6 @@
-package computer.drive;
+package computer.hardware.drive;
 
-import computer.file.File;
+import computer.software.file.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package computer.usbdevice;
+package computer.hardware.usbdevice;
 
 public interface USBDevice {
     boolean connect();

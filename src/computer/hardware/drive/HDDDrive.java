@@ -1,5 +1,5 @@
-package computer.drive;
-import computer.file.File;
+package computer.hardware.drive;
+import computer.software.file.File;
 import java.util.ArrayList;
 import java.util.List;
 

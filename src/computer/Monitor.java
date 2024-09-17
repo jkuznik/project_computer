@@ -21,6 +21,6 @@ public class Monitor {
         height = 600;
     }
     public String getResolution(){
-        return width + "x" + height;
+        return "Current resolution: " + width + "x" + height;
     }
 }

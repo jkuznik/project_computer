@@ -1,4 +1,20 @@
 package computer.hardware;
 
-public record Headphones(String name) {
+public class Headphones implements Components {
+
+    private String name;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public ComponentType getType() {
+        return null;
+    }
 }

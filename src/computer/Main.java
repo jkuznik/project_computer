@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Monitor monitor = new Monitor("Dell");
-        Drive   hddDrive = new HDDDrive();
+        Drive   hddDrive = new HDDDrive("HDDDrive name");
         Computer computer = new Computer(monitor, hddDrive);
 
 

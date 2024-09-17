@@ -1,36 +1,22 @@
 package computer.hardware.usbdevice;
 
-public class MemoryStick implements USBDevice{
-    private final String name;
-    private boolean ejected = false;
+import computer.hardware.ComponentType;
+
+public class MemoryStick extends USBDevice {
 
     public MemoryStick(String name) {
-        this.name = name;
+        super(name);
     }
 
     @Override
-    public boolean connect() {
-        System.out.println("Memory Stick connected");
-        return true;
+    public void connect() {
+        System.out.println("Memory Stick Connected");
+        connected = true;
     }
 
     @Override
-    public boolean disconnect() {
-        if (ejected){
-            System.out.println("Memory stick disconnected");
-            return true;
-        }else {
-            System.out.println("Please eject memory stick first");
-            return false;
-        }
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-    public void eject(){
-        System.out.println("Ejected memory stick");
-        ejected = true;
+    public void disconnect() {
+        System.out.println("Memory Stick Disconnected");
+        connected = false;
     }
 }

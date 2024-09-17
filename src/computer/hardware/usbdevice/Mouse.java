@@ -1,26 +1,22 @@
 package computer.hardware.usbdevice;
 
-public class Mouse implements USBDevice{
-    private final String name;
+import computer.hardware.ComponentType;
+
+public class Mouse extends USBDevice{
 
     public Mouse(String name) {
-        this.name = name;
+        super(name);
     }
 
     @Override
-    public boolean connect() {
+    public void connect() {
         System.out.println("Mouse connected");
-        return true;
+        connected = true;
     }
 
     @Override
-    public boolean disconnect() {
+    public void disconnect() {
         System.out.println("Mouse disconnected");
-        return true;
-    }
-
-    @Override
-    public String getName() {
-        return name;
+        connected = false;
     }
 }

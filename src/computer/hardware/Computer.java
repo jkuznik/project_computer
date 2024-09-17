@@ -42,21 +42,21 @@ public class Computer {
         return usbDevices;
     }
 
-    public void addUSBDevice(USBDevice usbDevice){
-        boolean isConnected = usbDevice.connect();
-        if (isConnected){
-            usbDevices.add(usbDevice);
-        }
-
-    }
-    public void removeUSBDevice(USBDevice usbDevice){
-        boolean isDisconnected = usbDevice.disconnect();
-        if (!isDisconnected) {
-            System.out.println("USB device forcefully removed");
-        }
-        usbDevices.remove(usbDevice);
-
-    }
+//    public void addUSBDevice(USBDevice usbDevice){
+//        boolean isConnected = usbDevice.connect();
+//        if (isConnected){
+//            usbDevices.add(usbDevice);
+//        }
+//
+//    }
+//    public void removeUSBDevice(USBDevice usbDevice){
+//        boolean isDisconnected = usbDevice.disconnect();
+//        if (!isDisconnected) {
+//            System.out.println("USB device forcefully removed");
+//        }
+//        usbDevices.remove(usbDevice);
+//
+//    }
 
     public Computer(Monitor monitor, Drive drive) {
         this.monitor = monitor;

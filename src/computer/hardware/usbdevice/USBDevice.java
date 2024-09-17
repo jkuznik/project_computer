@@ -1,7 +1,35 @@
 package computer.hardware.usbdevice;
 
-public interface USBDevice {
-    boolean connect();
-    boolean disconnect();
-    String getName();
+import computer.hardware.ComponentType;
+import computer.hardware.Components;
+
+public abstract class USBDevice implements Components {
+    String name;
+    boolean connected = false;
+
+    public USBDevice(String name) {
+        this.name = name;
+    }
+
+    public void connect(){
+        connected = true;
+    }
+
+    public void disconnect(){
+        connected = false;
+    }
+
+    public boolean isConnected(){
+        return connected;
+    }
+
+    @Override
+    public String getName() {
+        return "";
+    }
+
+    @Override
+    public ComponentType getType() {
+        return null;
+    }
 }

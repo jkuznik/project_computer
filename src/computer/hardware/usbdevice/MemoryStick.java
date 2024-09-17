@@ -1,5 +1,6 @@
 package computer.hardware.usbdevice;
 
+import computer.hardware.Capacity;
 import computer.software.file.File;
 import computer.software.file.FileNotFoundException;
 
@@ -8,29 +9,36 @@ import java.util.List;
 
 public class MemoryStick extends USBDevice {
 
+    private final Capacity STORAGE_CAPACITY;
+    private Integer capacityUsage = 0;
+
     List<File> files = new ArrayList<>();
 
-    public MemoryStick(String name) {
+    public MemoryStick(String name, Capacity storageCapacity) {
         super(name);
-    }
-
-    @Override
-    public void connect() {
-        System.out.println("Memory Stick Connected");
-        connected = true;
-    }
-
-    @Override
-    public void disconnect() {
-        System.out.println("Memory Stick disconnected");
-        connected = false;
+        this.STORAGE_CAPACITY = storageCapacity;
     }
 
     public void addFile(File file) {
         if (connected) {
-            files.add(file);
+            if(STORAGE_CAPACITY.getSize() > capacityUsage + file.getSize()) {
+                files.add(file);
+                capacityUsage+=file.getSize();
+            } else {
+                System.out.println("Not enough space in storage capacity");     //TODO utworzyć wyjątek i wykorzystać tutaj
+            }
         } else {
             throw new MemoryStickDisconnectedException("Memory Stick is disconnected");
+        }
+    }
+
+    public void removeFile(File file) {
+        try{
+            findFileByName(file.getName());
+            files.remove(file);
+            capacityUsage-=file.getSize();
+        } catch(FileNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -45,5 +53,9 @@ public class MemoryStick extends USBDevice {
             }
         }
         throw new FileNotFoundException("File " + name + " not found");
+    }
+
+    public Long getStorageCapacity() {
+        return STORAGE_CAPACITY.getSize();
     }
 }

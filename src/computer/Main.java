@@ -1,5 +1,6 @@
 package computer;
 
+import computer.hardware.Capacity;
 import computer.hardware.Computer;
 import computer.hardware.drive.Drive;
 import computer.hardware.drive.HDDDrive;
@@ -29,7 +30,7 @@ public class Main {
 //        computer.addFile(new JPGImageFIle("file.png", 15, 85));
 //        computer.listFiles();
         Mouse mouse = new Mouse("Mysz");
-        MemoryStick memoryStick = new MemoryStick("Pendrive");
+        MemoryStick memoryStick = new MemoryStick("Pendrive", Capacity.GB1);
 //
 //        computer.removeUSBDevice(mouse);
 //        memoryStick.eject();
@@ -98,6 +99,9 @@ public class Main {
                             case "3" ->{
                                 for (USBDevice device : usbDevices){
                                    System.out.println(device.getName());
+                                   if(device instanceof MemoryStick){
+                                       System.out.println(((MemoryStick) device).getStorageCapacity() + "B");
+                                   }
                                }
                             }
                             case "end" ->{

@@ -2,10 +2,11 @@ package computer.hardware.usbdevice;
 
 import computer.hardware.ComponentType;
 import computer.hardware.Components;
+import computer.software.file.FileOperation;
 
 import java.util.Scanner;
 
-public abstract class USBDevice implements Components {
+public abstract class USBDevice extends FileOperation implements Components {
     protected String name;
     protected boolean connected = false;
     protected boolean safeDisconnect = false;

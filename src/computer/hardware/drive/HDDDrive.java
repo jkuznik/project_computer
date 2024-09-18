@@ -1,9 +1,16 @@
-package computer.drive;
-import computer.file.File;
+package computer.hardware.drive;
+import computer.hardware.ComponentType;
+import computer.software.file.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HDDDrive implements Drive{
+    String name;
+
+    public HDDDrive(String name) {
+        this.name = name;
+    }
+
     List<File> files = new ArrayList<>();
 
     @Override
@@ -26,5 +33,15 @@ public class HDDDrive implements Drive{
             }
         }
         return null;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public ComponentType getType() {
+        return ComponentType.DRIVE;
     }
 }

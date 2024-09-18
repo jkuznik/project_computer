@@ -1,4 +1,4 @@
-package computer.file.music;
+package computer.software.file.music;
 
 public class MP3File extends AbstractMusicFIle{
     private final int quality;

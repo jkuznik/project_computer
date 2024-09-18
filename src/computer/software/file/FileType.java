@@ -1,4 +1,4 @@
-package computer.file;
+package computer.software.file;
 
 public enum FileType {
     MUSIC, IMAGE

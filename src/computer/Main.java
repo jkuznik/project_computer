@@ -157,6 +157,8 @@ public class Main {
                         3. List hardware
                         4. Set high monitor resolution
                         5. Set low monitor resolution
+                        6. Change headphone's volume
+                        7. Show current headphone's volume
                         back <- to go back
                         end <- to exit
                         """);
@@ -178,6 +180,10 @@ public class Main {
                             case "5" ->{
                                 monitor.setLowResolution();
                                 System.out.println(monitor.getResolution());
+                            }
+                            case "6" ->{
+                                System.out.println("Set new volume (0-100)");
+
                             }
                             case "end" ->{
                                 return;

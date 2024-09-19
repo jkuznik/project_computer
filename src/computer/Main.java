@@ -64,28 +64,51 @@ public class Main {
 //        System.out.println(file.getSize());
 //        System.out.println(file.getName());
 
-        String menu;
-        String subMenu;
-        do {
-            System.out.println("""
+        String mainMenu = """
                     Choose the submenu
                     1. USB devices
                     2. Files
                     3. Hardware
                     4. end <- to exit
-                    """);
-            menu = scanner.nextLine();
-            switch (menu){
-                case "1" ->{
-                    do{
-                        System.out.println("""
+                    """;
+        String usbMenu = """
                         Choose the option
                         1. Add USB device
                         2. Remove USB device
                         3. List USB devices
                         back <- to go back
                         end <- to exit
-                        """);
+                        """;
+        String fileMenu = """
+                        Choose the option
+                        1. Add file
+                        2. Remove file
+                        3. Find file
+                        4. List file
+                        back <- to go back
+                        end <- to exit
+                        """;
+        String hardwareMenu = """
+                        Choose the option
+                        1. Add hardware
+                        2. Remove hardware
+                        3. List hardware
+                        4. Set high monitor resolution
+                        5. Set low monitor resolution
+                        6. Change headphone's volume
+                        7. Show current headphone's volume
+                        back <- to go back
+                        end <- to exit
+                        """;
+        String menu;
+        String subMenu;
+        do {
+            System.out.println(mainMenu);
+            menu = scanner.nextLine();
+            switch (menu){
+                case "1" ->{
+                    do{
+                        System.out.println(usbMenu);
                         subMenu = scanner.nextLine();
                         switch (subMenu){
                             case "1" ->{
@@ -113,15 +136,7 @@ public class Main {
                 }
                 case "2" ->{
                     do{
-                        System.out.println("""
-                        Choose the option
-                        1. Add file
-                        2. Remove file
-                        3. Find file
-                        4. List file
-                        back <- to go back
-                        end <- to exit
-                        """);
+                        System.out.println(fileMenu);
                         subMenu = scanner.nextLine();
                         switch (subMenu){
                             case "1" ->{
@@ -150,18 +165,7 @@ public class Main {
                 }
                 case "3" ->{
                     do {
-                        System.out.println("""
-                        Choose the option
-                        1. Add hardware
-                        2. Remove hardware
-                        3. List hardware
-                        4. Set high monitor resolution
-                        5. Set low monitor resolution
-                        6. Change headphone's volume
-                        7. Show current headphone's volume
-                        back <- to go back
-                        end <- to exit
-                        """);
+                        System.out.println(hardwareMenu);
                         subMenu = scanner.nextLine();
                         switch (subMenu){
                             case "1" ->{

@@ -2,16 +2,15 @@ package computer;
 
 import computer.hardware.Capacity;
 import computer.hardware.Computer;
+import computer.hardware.Monitor;
 import computer.hardware.drive.Drive;
 import computer.hardware.drive.HDDDrive;
 import computer.hardware.usbdevice.MemoryStick;
 import computer.hardware.usbdevice.Mouse;
 import computer.hardware.usbdevice.USBDevice;
-import computer.software.file.File;
 import computer.software.file.image.GIFImageFile;
 import computer.software.file.image.JPGImageFIle;
 import computer.software.file.music.MP3File;
-import computer.hardware.Monitor;
 
 import java.util.List;
 import java.util.Scanner;

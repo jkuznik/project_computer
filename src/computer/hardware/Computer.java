@@ -1,6 +1,7 @@
 package computer.hardware;
 
 import computer.hardware.drive.Drive;
+import computer.hardware.usbdevice.MemoryStick;
 import computer.software.file.File;
 import computer.hardware.usbdevice.USBDevice;
 
@@ -19,15 +20,6 @@ public class Computer {
         for (Components component : components) {
             if (component instanceof Monitor) {
                 return (Monitor) component;
-            }
-        }
-        throw new RuntimeException("No component found");
-    }
-
-    public Drive getDrive() {
-        for (Components component : components) {
-            if (component instanceof Drive) {
-                return (Drive) component;
             }
         }
         throw new RuntimeException("No component found");
@@ -52,6 +44,18 @@ public class Computer {
         return usbDevices;
     }
 
+    public MemoryStick getMemoryStickByName(String name){
+        List<USBDevice> usbDevices = getUSBDevices();
+        for (USBDevice usbDevice : usbDevices) {
+            if (usbDevice instanceof MemoryStick) {
+                if ( usbDevice.getName().equals(name) ) {
+                    return (MemoryStick) usbDevice;
+                }
+            }
+        }
+        throw new RuntimeException("Memory stick '" + name + "' device not found");
+    }
+
     public void addComponent(Components component) {
         components.add(component);
     }
@@ -66,6 +70,7 @@ public class Computer {
         drive.addFile(file);
         components.add(drive);
     }
+
     public void listFiles(){
         var drive = getDrive();
         drive.listFiles();
@@ -73,5 +78,14 @@ public class Computer {
     public File findFile(String fileName){
         var drive = getDrive();
         return drive.findFile(fileName);
+    }
+
+    private Drive getDrive() {
+        for (Components component : components) {
+            if (component instanceof Drive) {
+                return (Drive) component;
+            }
+        }
+        throw new RuntimeException("No component found");
     }
 }

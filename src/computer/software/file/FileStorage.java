@@ -17,7 +17,7 @@ public class FileStorage {
     }
 
     public void addFile(File file) {
-        if (isEnoughSpace(file))
+        if (isEnoughSpace(file))    //TODO zaplanować inne warunki do spełnienia przed dodaniem pliku (np. posiadane uprawnienia dla twardego dysku, konieczność logowania dla chmury, czy pendrive jest podłączony)
             files.add(file);
     }
 

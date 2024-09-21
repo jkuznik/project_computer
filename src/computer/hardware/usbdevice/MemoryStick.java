@@ -1,7 +1,6 @@
 package computer.hardware.usbdevice;
 
 import computer.hardware.Capacity;
-import computer.hardware.drive.Drive;
 import computer.software.file.File;
 import computer.software.file.FileNotFoundException;
 

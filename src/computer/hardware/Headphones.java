@@ -9,7 +9,7 @@ public class Headphones implements Components {
     }
 
     @Override
-    public String getName() {
+    public String getNAME() {
         return name;
     }
 

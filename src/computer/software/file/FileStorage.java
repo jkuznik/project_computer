@@ -1,51 +1,32 @@
 package computer.software.file;
 
-import computer.hardware.Capacity;
-import computer.hardware.drive.Drive;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class FileStorage implements Drive {
+public class FileStorage {
 
-    protected final Capacity STORAGE_CAPACITY;
-    protected Integer capacityUsage = 0;
-    protected List<File> files = new ArrayList<>();
-
-    protected FileStorage(Capacity storageCapacity) {
-        STORAGE_CAPACITY = storageCapacity;
-    }
-
-    protected Capacity getStorageCapacity() {
-        return STORAGE_CAPACITY;
-    }
-
-    public void addFile(File file) {
-            if(STORAGE_CAPACITY.getSize() > capacityUsage + file.getSize()) {
-                files.add(file);
-                capacityUsage+=file.getSize();
-            } else {
-                System.out.println("Not enough space in storage capacity");     //TODO utworzyć wyjątek i wykorzystać tutaj
-            }
-    }
-
-    public void removeFile(File file) {
-        try{
-            findFile(file.getName());
-            files.remove(file);
-            capacityUsage-=file.getSize();
-        } catch(FileNotFoundException e) {
-            System.out.println(e.getMessage());
+    public static int addFile(List<File> files, File file, int emptySpace ) {
+        if(emptySpace > file.getSize()) {
+            files.add(file);
+            emptySpace +=file.getSize();
+        } else {
+            System.out.println("Not enough space in storage capacity");     //TODO utworzyć wyjątek i wykorzystać tutaj
         }
+        return emptySpace;
     }
 
-    public void listFiles() {
+    public static void removeFile(List<File> files, File file) {
+        if (files.contains(file)) {
+            files.remove(file);
+        } else throw new IllegalArgumentException("The given file does not exist");
+    }
+
+    public static void listFiles(List<File> files) {
         for (File file : files){
             System.out.println(file.getName());
         }
     }
 
-    public File findFile(String name) {
+    public static File findFile(List<File> files, String name) {
         for (File file : files) {
             if (file.getName().equals(name)) {
                 return file;

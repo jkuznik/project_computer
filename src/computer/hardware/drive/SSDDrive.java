@@ -3,24 +3,48 @@ package computer.hardware.drive;
 import computer.hardware.Capacity;
 import computer.hardware.ComponentType;
 import computer.software.file.File;
+import computer.software.file.FileNotFoundException;
 import computer.software.file.FileStorage;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class SSDDrive extends FileStorage {
+public class SSDDrive implements Drive {
     private Capacity capacity;
     String name;
     Map<String, File> files =new HashMap<>();
 
-    public SSDDrive(Capacity capacity, String name) {
-        super(capacity);
+    public SSDDrive(String name) {
         this.name = name;
     }
 
     @Override
-    public String getName() {
+    public void addFile(File file) {
+        files.put(file.getName(), file);
+    }
+
+    @Override
+    public void removeFile(File file) {
+        files.remove(file.getName());
+    }
+
+    @Override
+    public void listFiles() {
+        for (File file : files.values()) {
+            System.out.println(file.getName());
+        }
+    }
+
+    @Override
+    public File findFile(String fileName) {
+        if (files.containsKey(fileName)) {
+            return files.get(fileName);
+        } else throw new FileNotFoundException(fileName + " not found");
+    }
+
+    @Override
+    public String getNAME() {
         return name;
     }
 

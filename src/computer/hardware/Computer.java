@@ -48,7 +48,7 @@ public class Computer {
         List<USBDevice> usbDevices = getUSBDevices();
         for (USBDevice usbDevice : usbDevices) {
             if (usbDevice instanceof MemoryStick) {
-                if ( usbDevice.getName().equals(name) ) {
+                if ( usbDevice.getNAME().equals(name) ) {
                     return (MemoryStick) usbDevice;
                 }
             }

@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Monitor monitor = new Monitor("Dell");
-        Drive   hddDrive = new HDDDrive(Capacity.GB64, "HDDDrive name");
+        Drive   hddDrive = new HDDDrive("HDDDrive", Capacity.GB64);
         Computer computer = new Computer(monitor, hddDrive);
 
 
@@ -48,7 +48,7 @@ public class Main {
 
         List<USBDevice> usbDevices = computer.getUSBDevices();
         for (USBDevice device : usbDevices){
-            System.out.println(device.getName());
+            System.out.println(device.getNAME());
         }
 
         MP3File mp3File = new MP3File("audio.mp3", 4000, "Rammstein", "Sonne", 100);
@@ -97,7 +97,7 @@ public class Main {
                             }
                             case "3" ->{
                                 for (USBDevice device : usbDevices){
-                                   System.out.println(device.getName());
+                                   System.out.println(device.getNAME());
                                    if(device instanceof MemoryStick){
                                        System.out.println(((MemoryStick) device).getStorageCapacity() + "B");
                                    }

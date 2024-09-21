@@ -2,6 +2,6 @@ package computer.hardware;
 
 public interface Components {
 
-    String getNAME();
+    String getName();
     ComponentType getType();
 }

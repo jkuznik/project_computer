@@ -25,7 +25,7 @@ public class Monitor implements Components{
     }
 
     @Override
-    public String getNAME() {
+    public String getName() {
         return name;
     }
 

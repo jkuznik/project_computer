@@ -48,7 +48,7 @@ public class Main {
 
         List<USBDevice> usbDevices = computer.getUSBDevices();
         for (USBDevice device : usbDevices){
-            System.out.println(device.getNAME());
+            System.out.println(device.getName());
         }
 
         MP3File mp3File = new MP3File("audio.mp3", 4000, "Rammstein", "Sonne", 100);
@@ -97,7 +97,7 @@ public class Main {
                             }
                             case "3" ->{
                                 for (USBDevice device : usbDevices){
-                                   System.out.println(device.getNAME());
+                                   System.out.println(device.getName());
                                    if(device instanceof MemoryStick){
                                        System.out.println(((MemoryStick) device).getStorageCapacity() + "B");
                                    }

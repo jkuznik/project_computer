@@ -11,16 +11,18 @@ import java.util.Map;
 import java.util.Set;
 
 public class SSDDrive implements Drive {
-    private Capacity capacity;
+    private final Capacity capacity;
     String name;
     Map<String, File> files =new HashMap<>();
 
-    public SSDDrive(String name) {
+    public SSDDrive(String name, Capacity capacity) {
         this.name = name;
+        this.capacity = capacity;
     }
 
     @Override
     public void addFile(File file) {
+        // TODO SSD Drive przechowuje pliki w HashMap a nie w List, albo to zmieniamy albo logika dodawania plików musi być oddzielna
         files.put(file.getName(), file);
     }
 
@@ -44,7 +46,7 @@ public class SSDDrive implements Drive {
     }
 
     @Override
-    public String getNAME() {
+    public String getName() {
         return name;
     }
 

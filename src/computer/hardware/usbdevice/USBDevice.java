@@ -16,9 +16,9 @@ public abstract class USBDevice implements Components {
 
     public void connect(){
         if(connected) {
-            System.out.println(this.getNAME() + " is already connected");
+            System.out.println(this.getName() + " is already connected");
         } else {
-            System.out.println(this.getNAME() + " connected");
+            System.out.println(this.getName() + " connected");
             connected = true;
         }
     }
@@ -27,7 +27,7 @@ public abstract class USBDevice implements Components {
         Scanner scanner = new Scanner(System.in);
         String chose;
         if(safeDisconnect){
-            System.out.println(this.getNAME() + " disconnected");
+            System.out.println(this.getName() + " disconnected");
             safeDisconnect = false;
             connected = false;
         } else {
@@ -36,12 +36,12 @@ public abstract class USBDevice implements Components {
 
             switch(chose){
                 case "Y" ->{
-                    System.out.println(this.getNAME() + " force disconnected");
+                    System.out.println(this.getName() + " force disconnected");
                     connected = false;
                 }
                 case "N" ->{
-                    System.out.println(this.getNAME() + " is still connected... Preparing safe disconnect..." +
-                            this.getNAME() + " disconnected");
+                    System.out.println(this.getName() + " is still connected... Preparing safe disconnect..." +
+                            this.getName() + " disconnected");
                     safeDisconnect = false;
                     connected = false;
                 }
@@ -62,7 +62,7 @@ public abstract class USBDevice implements Components {
     }
 
     @Override
-    public String getNAME() {
+    public String getName() {
         return name;
     }
 

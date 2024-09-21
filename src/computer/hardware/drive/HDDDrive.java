@@ -1,38 +1,18 @@
 package computer.hardware.drive;
+import computer.hardware.Capacity;
 import computer.hardware.ComponentType;
 import computer.software.file.File;
+import computer.software.file.FileStorage;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class HDDDrive implements Drive{
+public class HDDDrive extends FileStorage{
     String name;
 
-    public HDDDrive(String name) {
+    public HDDDrive(Capacity capacity, String name) {
+        super(capacity);
         this.name = name;
-    }
-
-    List<File> files = new ArrayList<>();
-
-    @Override
-    public void addFile(File file) {
-        files.add(file);
-    }
-
-    @Override
-    public void listFiles() {
-        for (File file : files){
-            System.out.println(file.getName());
-        }
-    }
-
-    @Override
-    public File findFile(String fileName) {
-        for (File file : files){
-            if (fileName.equals(file.getName())){
-                return file;
-            }
-        }
-        return null;
     }
 
     @Override

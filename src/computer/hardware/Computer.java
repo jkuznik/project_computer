@@ -64,7 +64,7 @@ public class Computer {
         components.remove(component);
     }
 
-    public void addFile(File file){
+    public void addFile(File file){ //TODO metody działające na plikach trzeba dostosować do możliwości posiadania różnych nośników (twardy dysk, pendrive)
         var drive = getDrive();
         components.remove(drive);
         drive.addFile(file);

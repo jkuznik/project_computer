@@ -1,35 +1,22 @@
 package computer.hardware.drive;
 
+import computer.hardware.Capacity;
 import computer.hardware.ComponentType;
 import computer.software.file.File;
+import computer.software.file.FileStorage;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class SSDDrive implements Drive{
+public class SSDDrive extends FileStorage {
+    private Capacity capacity;
     String name;
     Map<String, File> files =new HashMap<>();
 
-    public SSDDrive(String name) {
+    public SSDDrive(Capacity capacity, String name) {
+        super(capacity);
         this.name = name;
-    }
-
-    @Override
-    public void addFile(File file) {
-        files.put(file.getName(), file);
-    }
-
-    @Override
-    public void listFiles() {
-        Set<String> fileNames = files.keySet();
-        for (String fileName : fileNames){
-            System.out.println(fileName);
-        }
-    }
-
-    @Override
-    public File findFile(String fileName) {
-        return files.get(fileName);
     }
 
     @Override

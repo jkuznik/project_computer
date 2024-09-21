@@ -42,8 +42,8 @@ public class FileStorage {
         throw new FileNotFoundException("File " + name + " not found");
     }
 
-    public int getStorageCapacity() {
-        return storageCapacity.getSize().intValue();
+    public long getStorageCapacity() {
+        return storageCapacity.getSize();
     }
 
     private boolean isEnoughSpace(File file) {

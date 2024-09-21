@@ -13,6 +13,7 @@ public class MemoryStick extends USBDevice {
         fileStorage = new FileStorage(storageCapacity);
     }
 
+    // TODO czy dodawać sprawdzanie czy pendrive jest podłączony przed każdą z operacji na plikach?
     public void addFile(File file) {
         fileStorage.addFile(file);
     }
@@ -25,7 +26,7 @@ public class MemoryStick extends USBDevice {
         return fileStorage.findFile(fileName);
     }
 
-    public int getStorageCapacity() {
+    public long getStorageCapacity() {
         return fileStorage.getStorageCapacity();
     }
 }

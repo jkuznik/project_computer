@@ -2,6 +2,7 @@ package computer.hardware.usbdevice;
 
 import computer.hardware.Capacity;
 import computer.software.file.File;
+import computer.software.file.FileNotFoundException;
 import computer.software.file.FileStorage;
 
 public class MemoryStick extends USBDevice {
@@ -23,7 +24,11 @@ public class MemoryStick extends USBDevice {
     }
 
     public File findFile(String fileName) {
-        return fileStorage.findFile(fileName);
+        try {
+            return fileStorage.findFile(fileName);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     public long getStorageCapacity() {

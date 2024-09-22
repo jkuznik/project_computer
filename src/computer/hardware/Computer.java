@@ -4,6 +4,7 @@ import computer.hardware.drive.Drive;
 import computer.hardware.usbdevice.MemoryStick;
 import computer.software.file.File;
 import computer.hardware.usbdevice.USBDevice;
+import computer.software.file.FileNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,6 @@ public class Computer {
 
     public void addFile(File file){ //TODO metody działające na plikach trzeba dostosować do możliwości posiadania różnych nośników (twardy dysk, pendrive)
         var drive = getDrive();
-        components.remove(drive);
         drive.addFile(file);
         components.add(drive);
     }
@@ -75,9 +75,14 @@ public class Computer {
         var drive = getDrive();
         drive.listFiles();
     }
-    public File findFile(String fileName){
+
+    public File findFile(String fileName) {
         var drive = getDrive();
-        return drive.findFile(fileName);
+        try {
+            return drive.findFile(fileName);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     private Drive getDrive() {

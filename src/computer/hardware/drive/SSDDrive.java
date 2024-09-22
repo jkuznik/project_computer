@@ -39,7 +39,7 @@ public class SSDDrive implements Drive {
     }
 
     @Override
-    public File findFile(String fileName) {
+    public File findFile(String fileName) throws FileNotFoundException {
         if (files.containsKey(fileName)) {
             return files.get(fileName);
         } else throw new FileNotFoundException(fileName + " not found");

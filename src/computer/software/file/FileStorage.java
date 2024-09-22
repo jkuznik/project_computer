@@ -17,8 +17,12 @@ public class FileStorage {
     }
 
     public void addFile(File file) {
-        if (isEnoughSpace(file))    //TODO zaplanować inne warunki do spełnienia przed dodaniem pliku (np. posiadane uprawnienia dla twardego dysku, konieczność logowania dla chmury, czy pendrive jest podłączony)
-            files.add(file);
+       try {
+           if (isEnoughSpace(file))
+               files.add(file);
+       } catch (NotEnoughSpaceException e) {
+           System.out.println(e.getMessage());
+       }
     }
 
     public void removeFile(File file) {
@@ -33,7 +37,7 @@ public class FileStorage {
         }
     }
 
-    public File findFile( String name) {
+    public File findFile( String name) throws FileNotFoundException {
         for (File file : files) {
             if (file.getName().equals(name)) {
                 return file;
@@ -46,8 +50,8 @@ public class FileStorage {
         return storageCapacity.getSize();
     }
 
-    private boolean isEnoughSpace(File file) {
-        if (storageCapacity.getSize().intValue() > capacityUsage + file.getSize()) {
+    private boolean isEnoughSpace(File file) throws NotEnoughSpaceException {
+        if (storageCapacity.getSize() > capacityUsage + file.getSize()) {
             return true;
         } else throw new NotEnoughSpaceException("Not enough space");
     }

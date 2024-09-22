@@ -2,6 +2,7 @@ package computer.hardware.drive;
 import computer.hardware.Capacity;
 import computer.hardware.ComponentType;
 import computer.software.file.File;
+import computer.software.file.FileNotFoundException;
 import computer.software.file.FileStorage;
 
 public class HDDDrive implements Drive {
@@ -31,7 +32,11 @@ public class HDDDrive implements Drive {
 
     @Override
     public File findFile(String fileName) {
-        return fileStorage.findFile(fileName);
+        try {
+            return fileStorage.findFile(fileName);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @Override

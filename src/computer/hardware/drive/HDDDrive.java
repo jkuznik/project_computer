@@ -1,38 +1,42 @@
 package computer.hardware.drive;
+import computer.hardware.Capacity;
 import computer.hardware.ComponentType;
 import computer.software.file.File;
-import java.util.ArrayList;
-import java.util.List;
+import computer.software.file.FileNotFoundException;
+import computer.software.file.FileStorage;
 
-public class HDDDrive implements Drive{
-    String name;
+public class HDDDrive implements Drive {
+    private final String name;
+    private final FileStorage fileStorage;
 
-    public HDDDrive(String name) {
+
+    public HDDDrive(String name, Capacity storageCapacity) {
         this.name = name;
+        fileStorage = new FileStorage(storageCapacity);
     }
-
-    List<File> files = new ArrayList<>();
 
     @Override
     public void addFile(File file) {
-        files.add(file);
+        fileStorage.addFile(file);
+    }
+
+    @Override
+    public void removeFile(File file) {
+        fileStorage.removeFile(file);
     }
 
     @Override
     public void listFiles() {
-        for (File file : files){
-            System.out.println(file.getName());
-        }
+        fileStorage.listFiles();
     }
 
     @Override
     public File findFile(String fileName) {
-        for (File file : files){
-            if (fileName.equals(file.getName())){
-                return file;
-            }
+        try {
+            return fileStorage.findFile(fileName);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
         }
-        return null;
     }
 
     @Override

@@ -1,16 +1,16 @@
 package computer;
 
+import computer.hardware.Capacity;
 import computer.hardware.Computer;
+import computer.hardware.Monitor;
 import computer.hardware.drive.Drive;
 import computer.hardware.drive.HDDDrive;
 import computer.hardware.usbdevice.MemoryStick;
 import computer.hardware.usbdevice.Mouse;
 import computer.hardware.usbdevice.USBDevice;
-import computer.software.file.File;
 import computer.software.file.image.GIFImageFile;
 import computer.software.file.image.JPGImageFIle;
 import computer.software.file.music.MP3File;
-import computer.hardware.Monitor;
 
 import java.util.List;
 import java.util.Scanner;
@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Monitor monitor = new Monitor("Dell");
-        Drive   hddDrive = new HDDDrive("HDDDrive name");
+        Drive   hddDrive = new HDDDrive("HDDDrive", Capacity.GB64);
         Computer computer = new Computer(monitor, hddDrive);
 
 
@@ -28,9 +28,17 @@ public class Main {
 
 //        computer.addFile(new JPGImageFIle("file.png", 15, 85));
 //        computer.listFiles();
-
         Mouse mouse = new Mouse("Mysz");
-        MemoryStick memoryStick = new MemoryStick("Pendrive");
+        MemoryStick memoryStick = new MemoryStick("Pendrive", Capacity.GB1);
+//
+//        computer.removeUSBDevice(mouse);
+//        memoryStick.eject();
+//        computer.removeUSBDevice(memoryStick);
+//        List<USBDevice> usbDevices = computer.getUsbDevices();
+//
+//        for (USBDevice device : usbDevices){
+//            System.out.println(device.getName());
+//        }
 
 //        computer.addUSBDevice(mouse);
 //        computer.addUSBDevice(memoryStick);           tak było
@@ -42,13 +50,6 @@ public class Main {
         for (USBDevice device : usbDevices){
             System.out.println(device.getName());
         }
-
-
-//        computer.removeUSBDevice(mouse);              tak było
-        computer.removeComponent(mouse);            // tak jest
-
-//        computer.removeUSBDevice(memoryStick);        tak było
-        computer.removeComponent(memoryStick);      // tak jest
 
         MP3File mp3File = new MP3File("audio.mp3", 4000, "Rammstein", "Sonne", 100);
         GIFImageFile gifImageFile = new GIFImageFile("funnydog.gif", 150);
@@ -95,9 +96,11 @@ public class Main {
                                 System.out.println("Removing USB device");
                             }
                             case "3" ->{
-                                usbDevices = computer.getUSBDevices();
                                 for (USBDevice device : usbDevices){
                                    System.out.println(device.getName());
+                                   if(device instanceof MemoryStick){
+                                       System.out.println(((MemoryStick) device).getStorageCapacity() + "B");
+                                   }
                                }
                             }
                             case "end" ->{

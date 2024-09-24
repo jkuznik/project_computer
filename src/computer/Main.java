@@ -192,6 +192,20 @@ public class Main {
                                 monitor.setLowResolution();
                                 System.out.println(monitor.getResolution());
                             }
+                            case CHANGE_HEADPHONE_VOLUME ->{
+                                System.out.println("Set new volume (0-100)");
+                            }
+                            case SHOW_CURRENT_HEADPHONE_VOLUME->{
+                                System.out.println("showing volume");
+                            }
+                            case END ->{
+                                System.exit(0);
+                            }
+                            default -> {
+                                if (!userChoice.equals(MenuOption.BACK)){
+                                    System.out.println("Wrong option");
+                                }
+                            }
                         }
                     }while (!userChoice.equals(MenuOption.BACK));
 

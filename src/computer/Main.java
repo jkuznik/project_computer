@@ -13,6 +13,7 @@ import computer.software.file.image.JPGImageFIle;
 import computer.software.file.music.MP3File;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -64,38 +65,61 @@ public class Main {
 //        System.out.println(file.getName());
 //        System.out.println(file.getSize());
 //        System.out.println(file.getName());
-
-        String menu;
-        String subMenu;
-        do {
-            System.out.println("""
+        String mainMenu = """
                     Choose the submenu
                     1. USB devices
                     2. Files
                     3. Hardware
                     4. end <- to exit
-                    """);
-            menu = scanner.nextLine();
-            switch (menu){
-                case "1" ->{
-                    do{
-                        System.out.println("""
+                    """;
+        String usbMenu = """
                         Choose the option
                         1. Add USB device
                         2. Remove USB device
                         3. List USB devices
                         back <- to go back
                         end <- to exit
-                        """);
-                        subMenu = scanner.nextLine();
+                        """;
+        String fileMenu = """
+                        Choose the option
+                        1. Add file
+                        2. Remove file
+                        3. Find file
+                        4. List all files
+                        back <- to go back
+                        end <- to exit
+                        """;
+        String hardwareMenu = """
+                        Choose the option
+                        1. Add hardware
+                        2. Remove hardware
+                        3. List hardware
+                        4. Set high monitor resolution
+                        5. Set low monitor resolution
+                        6. Change headphone's volume
+                        7. Show current headphone's volume
+                        back <- to go back
+                        end <- to exit
+                        """;
+        String menu;
+        String subMenu;
+        do {
+            System.out.println(mainMenu);
+            menu = MenuOption.chosenAction(scanner.nextLine(),"main").toString().toLowerCase(Locale.ROOT);
+            switch (menu){
+                case "usb_devices" ->{
+                    do{
+                        System.out.println(usbMenu);
+                        subMenu = MenuOption.chosenAction(scanner.nextLine(),"usb").toString().toLowerCase(Locale.ROOT);
                         switch (subMenu){
-                            case "1" ->{
+                            case "add_usb_device" ->{
                                 System.out.println("Adding USB device");
                             }
-                            case "2" ->{
+                            case "remove_usb_device" ->{
                                 System.out.println("Removing USB device");
                             }
-                            case "3" ->{
+                            case "list_usb_devices" ->{
+                                usbDevices = computer.getUSBDevices();
                                 for (USBDevice device : usbDevices){
                                    System.out.println(device.getName());
                                    if(device instanceof MemoryStick){
@@ -104,7 +128,7 @@ public class Main {
                                }
                             }
                             case "end" ->{
-                                return;
+                                System.exit(0);
                             }
                             default -> {
                                 if (!subMenu.equals("back")){
@@ -114,33 +138,25 @@ public class Main {
                         }
                     }while (!subMenu.equals("back"));
                 }
-                case "2" ->{
+                case "files" ->{
                     do{
-                        System.out.println("""
-                        Choose the option
-                        1. Add file
-                        2. Remove file
-                        3. Find file
-                        4. List file
-                        back <- to go back
-                        end <- to exit
-                        """);
-                        subMenu = scanner.nextLine();
+                        System.out.println(fileMenu);
+                        subMenu = MenuOption.chosenAction(scanner.nextLine(),"file").toString().toLowerCase(Locale.ROOT);
                         switch (subMenu){
-                            case "1" ->{
+                            case "add_file" ->{
                                 System.out.println("Adding file");
                             }
-                            case "2" ->{
+                            case "remove_file" ->{
                                 System.out.println("Removing file");
                             }
-                            case "3" ->{
+                            case "find_file" ->{
                                 System.out.println("Finding file");
                             }
-                            case "4" ->{
+                            case "list_all_files" ->{
                                 computer.listFiles();
                             }
                             case "end" ->{
-                                return;
+                                System.exit(0);
                             }
                             default -> {
                                 if (!subMenu.equals("back")){
@@ -151,39 +167,37 @@ public class Main {
                     }while (!subMenu.equals("back"));
 
                 }
-                case "3" ->{
+                case "hardware" ->{
                     do {
-                        System.out.println("""
-                        Choose the option
-                        1. Add hardware
-                        2. Remove hardware
-                        3. List hardware
-                        4. Set high monitor resolution
-                        5. Set low monitor resolution
-                        back <- to go back
-                        end <- to exit
-                        """);
-                        subMenu = scanner.nextLine();
+                        System.out.println(hardwareMenu);
+                        subMenu = MenuOption.chosenAction(scanner.nextLine(),"hardware").toString().toLowerCase(Locale.ROOT);
                         switch (subMenu){
-                            case "1" ->{
+                            case "add_hardware" ->{
                                 System.out.println("Adding hardware");
                             }
-                            case "2" ->{
+                            case "remove_hardware" ->{
                                 System.out.println("Removing hardware");
                             }
-                            case "3" ->{
+                            case "list_hardware" ->{
                                 System.out.println("Listing hardware");
                             }
-                            case "4" ->{
+                            case "set_high_monitor_resolution" ->{
                                 monitor.setHeightResolution();
                                 System.out.println(monitor.getResolution());
                             }
-                            case "5" ->{
+                            case "set_low_monitor_resolution" ->{
                                 monitor.setLowResolution();
                                 System.out.println(monitor.getResolution());
                             }
+                            case "change_headphone_volume" ->{
+                                System.out.println("Set new volume (0-100)");
+
+                            }
+                            case "show_current_headphone_volume"->{
+                                System.out.println("showing volume");
+                            }
                             case "end" ->{
-                                return;
+                                System.exit(0);
                             }
                             default -> {
                                 if (!subMenu.equals("back")){

@@ -168,44 +168,32 @@ public class Main {
 
                 }
                 case "hardware" ->{
+                    MenuOption userChoice;
                     do {
                         System.out.println(hardwareMenu);
-                        subMenu = MenuOption.chosenAction(scanner.nextLine(),"hardware").toString().toLowerCase(Locale.ROOT);
-                        switch (subMenu){
-                            case "add_hardware" ->{
+                        userChoice = MenuOption.chosenAction(scanner.nextLine(),"hardware");
+
+//                        subMenu = MenuOption.chosenAction(scanner.nextLine(),"hardware").toString().toLowerCase(Locale.ROOT);
+                        switch (userChoice){
+                            case MenuOption.ADD_FILE ->{
                                 System.out.println("Adding hardware");
                             }
-                            case "remove_hardware" ->{
+                            case MenuOption.REMOVE_HARDWARE ->{
                                 System.out.println("Removing hardware");
                             }
-                            case "list_hardware" ->{
+                            case MenuOption.LIST_HARDWARE ->{
                                 System.out.println("Listing hardware");
                             }
-                            case "set_high_monitor_resolution" ->{
+                            case MenuOption.SET_HIGH_MONITOR_RESOLUTION ->{
                                 monitor.setHeightResolution();
                                 System.out.println(monitor.getResolution());
                             }
-                            case "set_low_monitor_resolution" ->{
+                            case MenuOption.SET_LOW_MONITOR_RESOLUTION ->{
                                 monitor.setLowResolution();
                                 System.out.println(monitor.getResolution());
                             }
-                            case "change_headphone_volume" ->{
-                                System.out.println("Set new volume (0-100)");
-
-                            }
-                            case "show_current_headphone_volume"->{
-                                System.out.println("showing volume");
-                            }
-                            case "end" ->{
-                                System.exit(0);
-                            }
-                            default -> {
-                                if (!subMenu.equals("back")){
-                                    System.out.println("Wrong option");
-                                }
-                            }
                         }
-                    }while (!subMenu.equals("back"));
+                    }while (!userChoice.equals(MenuOption.BACK));
 
                 }
             }

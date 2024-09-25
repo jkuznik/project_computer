@@ -15,9 +15,18 @@ import java.util.List;
 public class Computer {
     List<Components> components = new ArrayList<>();
 
-    public Computer(Monitor monitor, Drive drive) {
+    private static Computer instance;
+
+    private Computer(Monitor monitor, Drive drive) {
         components.add(monitor);
         components.add(drive);
+        // run();   dodać metodę uruchamiającą komputer, jeżeli będzie w konstruktorze zostanie automatycznie wywołana podczas inicializowania instancji Computer
+    }
+
+    public static Computer getInstance(Monitor monitor, Drive drive){
+        if (instance == null){
+            return new Computer(monitor, drive);
+        } else return instance;
     }
 
     public Monitor getMonitor() {

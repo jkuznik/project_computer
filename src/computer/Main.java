@@ -22,15 +22,16 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Monitor monitor = new Monitor("Dell");
         Drive   hddDrive = new HDDDrive("HDDDrive", Capacity.GB64);
-        Computer computer = new Computer(monitor, hddDrive);
+        Computer computer = Computer.getInstance(monitor, hddDrive);
+        List<USBDevice> usbDevices = computer.getUSBDevices();
 
+/*      TODO: wszystko to co zakomentowane powinno zniknąć z klasy Main, jeżeli coś ma być inicializowane (do testów lub na stałe) w trakcie tworzenia komputera należy to dodać do konstrukora klasy Computer,
+        TODO: reszta może być uwzględniona w interfejsie i wykonywane podczas RUN TIME.
         Mouse mouse = new Mouse("Mysz");
         MemoryStick memoryStick = new MemoryStick("Pendrive", Capacity.GB1);
 
         computer.addComponent(mouse);
         computer.addComponent(memoryStick);
-
-        List<USBDevice> usbDevices = computer.getUSBDevices();
 
         MP3File mp3File = new MP3File("audio.mp3", 4000, "Rammstein", "Sonne", 100);
         GIFImageFile gifImageFile = new GIFImageFile("funnydog.gif", 150);
@@ -38,7 +39,7 @@ public class Main {
 
         computer.addFile(mp3File);
         computer.addFile(gifImageFile);
-        computer.addFile(jpgImageFIle);
+        computer.addFile(jpgImageFIle);*/
 
         MenuOption userChoice;
 
@@ -103,7 +104,7 @@ public class Main {
                         back <- to go back
                         end <- to exit
                         """);
-                        userChoice = MenuOption.chosenAction(scanner.nextLine(),MenuIndicator.FILE_MENU);
+                        userChoice = MenuOption.chosenAction(scanner.nextLine(), MenuIndicator.FILE_MENU);
 
                         switch (userChoice){
                             case ADD_FILE ->{
@@ -144,7 +145,7 @@ public class Main {
                         back <- to go back
                         end <- to exit
                         """);
-                        userChoice = MenuOption.chosenAction(scanner.nextLine(),MenuIndicator.HARDWARE_MENU);
+                        userChoice = MenuOption.chosenAction(scanner.nextLine(), MenuIndicator.HARDWARE_MENU);
 
                         switch (userChoice){
                             case ADD_HARDWARE ->{

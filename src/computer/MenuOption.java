@@ -1,9 +1,9 @@
 package computer;
 
 public enum MenuOption {
-    USB_DEVICES("1","main"),
-    FILES("2","main"),
-    HARDWARE("3","main"),
+    USB_DEVICES_MENU("1","main"),
+    FILES_MENU("2","main"),
+    HARDWARE_MENU("3","main"),
 
     ADD_USB_DEVICE("1" , "usb"),
     REMOVE_USB_DEVICE("2" , "usb"),

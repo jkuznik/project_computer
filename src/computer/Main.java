@@ -13,7 +13,6 @@ import computer.software.file.image.JPGImageFIle;
 import computer.software.file.music.MP3File;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -23,34 +22,13 @@ public class Main {
         Drive   hddDrive = new HDDDrive("HDDDrive", Capacity.GB64);
         Computer computer = new Computer(monitor, hddDrive);
 
-
-//        ssdDrive.addFile(new computer.software.file.File("photo.jpg"));
-//        ssdDrive.listFiles();
-
-//        computer.addFile(new JPGImageFIle("file.png", 15, 85));
-//        computer.listFiles();
         Mouse mouse = new Mouse("Mysz");
         MemoryStick memoryStick = new MemoryStick("Pendrive", Capacity.GB1);
-//
-//        computer.removeUSBDevice(mouse);
-//        memoryStick.eject();
-//        computer.removeUSBDevice(memoryStick);
-//        List<USBDevice> usbDevices = computer.getUsbDevices();
-//
-//        for (USBDevice device : usbDevices){
-//            System.out.println(device.getName());
-//        }
-
-//        computer.addUSBDevice(mouse);
-//        computer.addUSBDevice(memoryStick);           tak było
 
         computer.addComponent(mouse);
-        computer.addComponent(memoryStick);         //  tak jest
+        computer.addComponent(memoryStick);
 
         List<USBDevice> usbDevices = computer.getUSBDevices();
-        for (USBDevice device : usbDevices){
-            System.out.println(device.getName());
-        }
 
         MP3File mp3File = new MP3File("audio.mp3", 4000, "Rammstein", "Sonne", 100);
         GIFImageFile gifImageFile = new GIFImageFile("funnydog.gif", 150);
@@ -60,27 +38,61 @@ public class Main {
         computer.addFile(gifImageFile);
         computer.addFile(jpgImageFIle);
 
-//        computer.listFiles();
-//        File file = computer.findFile("audio.mp3");
-//        System.out.println(file.getName());
-//        System.out.println(file.getSize());
-//        System.out.println(file.getName());
-        String mainMenu = """
+        MenuOption userChoice;
+
+        do {
+            System.out.println("""
                     Choose the submenu
                     1. USB devices
                     2. Files
                     3. Hardware
                     4. end <- to exit
-                    """;
-        String usbMenu = """
+                    """);
+            userChoice = MenuOption.chosenAction(scanner.nextLine(),"main");
+
+            switch (userChoice){
+
+                case USB_DEVICES_MENU ->{
+                    do{
+                        System.out.println("""
                         Choose the option
                         1. Add USB device
                         2. Remove USB device
                         3. List USB devices
                         back <- to go back
                         end <- to exit
-                        """;
-        String fileMenu = """
+                        """);
+                        userChoice = MenuOption.chosenAction(scanner.nextLine(),"usb");
+
+                        switch (userChoice){
+                            case ADD_USB_DEVICE ->{
+                                System.out.println("Adding USB device");
+                            }
+                            case REMOVE_USB_DEVICE ->{
+                                System.out.println("Removing USB device");
+                            }
+                            case LIST_USB_DEVICES ->{
+                                for (USBDevice device : usbDevices){
+                                   System.out.println(device.getName());
+                                   if(device instanceof MemoryStick){
+                                       System.out.println(((MemoryStick) device).getStorageCapacity() + "B");
+                                   }
+                               }
+                            }
+                            case END ->{
+                                System.exit(0);
+                            }
+                            default -> {
+                                if (!userChoice.equals(MenuOption.BACK)){
+                                    System.out.println("Wrong option");
+                                }
+                            }
+                        }
+                    }while (!userChoice.equals(MenuOption.BACK));
+                }
+                case FILES_MENU ->{
+                    do{
+                        System.out.println("""
                         Choose the option
                         1. Add file
                         2. Remove file
@@ -88,8 +100,37 @@ public class Main {
                         4. List all files
                         back <- to go back
                         end <- to exit
-                        """;
-        String hardwareMenu = """
+                        """);
+                        userChoice = MenuOption.chosenAction(scanner.nextLine(),"file");
+
+                        switch (userChoice){
+                            case ADD_FILE ->{
+                                System.out.println("Adding file");
+                            }
+                            case REMOVE_FILE ->{
+                                System.out.println("Removing file");
+                            }
+                            case FIND_FILE ->{
+                                System.out.println("Finding file");
+                            }
+                            case LIST_ALL_FILES ->{
+                                computer.listFiles();
+                            }
+                            case END ->{
+                                System.exit(0);
+                            }
+                            default -> {
+                                if (!userChoice.equals(MenuOption.BACK)){
+                                    System.out.println("Wrong option");
+                                }
+                            }
+                        }
+                    }while (!userChoice.equals(MenuOption.BACK));
+
+                }
+                case HARDWARE_MENU ->{
+                    do {
+                        System.out.println("""
                         Choose the option
                         1. Add hardware
                         2. Remove hardware
@@ -100,95 +141,24 @@ public class Main {
                         7. Show current headphone's volume
                         back <- to go back
                         end <- to exit
-                        """;
-        String menu;
-        String subMenu;
-        do {
-            System.out.println(mainMenu);
-            menu = MenuOption.chosenAction(scanner.nextLine(),"main").toString().toLowerCase(Locale.ROOT);
-            switch (menu){
-                case "usb_devices" ->{
-                    do{
-                        System.out.println(usbMenu);
-                        subMenu = MenuOption.chosenAction(scanner.nextLine(),"usb").toString().toLowerCase(Locale.ROOT);
-                        switch (subMenu){
-                            case "add_usb_device" ->{
-                                System.out.println("Adding USB device");
-                            }
-                            case "remove_usb_device" ->{
-                                System.out.println("Removing USB device");
-                            }
-                            case "list_usb_devices" ->{
-                                usbDevices = computer.getUSBDevices();
-                                for (USBDevice device : usbDevices){
-                                   System.out.println(device.getName());
-                                   if(device instanceof MemoryStick){
-                                       System.out.println(((MemoryStick) device).getStorageCapacity() + "B");
-                                   }
-                               }
-                            }
-                            case "end" ->{
-                                System.exit(0);
-                            }
-                            default -> {
-                                if (!subMenu.equals("back")){
-                                    System.out.println("Wrong option");
-                                }
-                            }
-                        }
-                    }while (!subMenu.equals("back"));
-                }
-                case "files" ->{
-                    do{
-                        System.out.println(fileMenu);
-                        subMenu = MenuOption.chosenAction(scanner.nextLine(),"file").toString().toLowerCase(Locale.ROOT);
-                        switch (subMenu){
-                            case "add_file" ->{
-                                System.out.println("Adding file");
-                            }
-                            case "remove_file" ->{
-                                System.out.println("Removing file");
-                            }
-                            case "find_file" ->{
-                                System.out.println("Finding file");
-                            }
-                            case "list_all_files" ->{
-                                computer.listFiles();
-                            }
-                            case "end" ->{
-                                System.exit(0);
-                            }
-                            default -> {
-                                if (!subMenu.equals("back")){
-                                    System.out.println("Wrong option");
-                                }
-                            }
-                        }
-                    }while (!subMenu.equals("back"));
-
-                }
-                case "hardware" ->{
-                    MenuOption userChoice;
-                    do {
-                        System.out.println(hardwareMenu);
+                        """);
                         userChoice = MenuOption.chosenAction(scanner.nextLine(),"hardware");
 
-//                        subMenu = MenuOption.chosenAction(scanner.nextLine(),"hardware").toString().toLowerCase(Locale.ROOT);
                         switch (userChoice){
-                            case MenuOption.ADD_FILE ->{
+                            case ADD_HARDWARE ->{
                                 System.out.println("Adding hardware");
                             }
-                            case MenuOption.REMOVE_HARDWARE ->{
+                            case REMOVE_HARDWARE ->{
                                 System.out.println("Removing hardware");
                             }
-                            case MenuOption.LIST_HARDWARE ->{
+                            case LIST_HARDWARE ->{
                                 System.out.println("Listing hardware");
                             }
-                            case MenuOption.SET_HIGH_MONITOR_RESOLUTION ->{
+                            case SET_HIGH_MONITOR_RESOLUTION ->{
                                 monitor.setHeightResolution();
                                 System.out.println(monitor.getResolution());
                             }
-                            case MenuOption.SET_LOW_MONITOR_RESOLUTION ->{
+                            case SET_LOW_MONITOR_RESOLUTION ->{
                                 monitor.setLowResolution();
                                 System.out.println(monitor.getResolution());
                             }
@@ -211,7 +181,8 @@ public class Main {
 
                 }
             }
-        }while (!menu.equals("end"));
+        }while (!userChoice.equals(MenuOption.END));
+
         System.out.println("cos");
 
     }

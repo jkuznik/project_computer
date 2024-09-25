@@ -20,13 +20,14 @@ public class Computer {
     private Computer(Monitor monitor, Drive drive) {
         components.add(monitor);
         components.add(drive);
-        // run();   dodać metodę uruchamiającą komputer, jeżeli będzie w konstruktorze zostanie automatycznie wywołana podczas inicializowania instancji Computer
+        // run();   dodać metodę uruchamiającą komputer, a w niej będzie ui (tak jakby odpali się terminal systemowy :P), jeżeli będzie w konstruktorze zostanie automatycznie wywołana podczas inicializowania instancji Computer
     }
 
     public static Computer getInstance(Monitor monitor, Drive drive){
         if (instance == null){
-            return new Computer(monitor, drive);
-        } else return instance;
+            instance = new Computer(monitor, drive);
+        }
+        return instance;
     }
 
     public Monitor getMonitor() {

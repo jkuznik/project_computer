@@ -1,18 +1,14 @@
 package computer;
 
-import computer.hardware.computer.MenuIndicator;
-import computer.software.file.shared.Capacity;
-import computer.hardware.computer.Computer;
 import computer.hardware.components.Monitor;
-import computer.hardware.computer.MenuOption;
 import computer.hardware.components.drive.Drive;
 import computer.hardware.components.drive.HDDDrive;
 import computer.hardware.components.usbdevice.MemoryStick;
-import computer.hardware.components.usbdevice.Mouse;
 import computer.hardware.components.usbdevice.USBDevice;
-import computer.software.file.image.GIFImageFile;
-import computer.software.file.image.JPGImageFIle;
-import computer.software.file.music.MP3File;
+import computer.hardware.computer.Computer;
+import computer.hardware.computer.MenuIndicator;
+import computer.hardware.computer.MenuOption;
+import computer.software.file.shared.Capacity;
 
 import java.util.List;
 import java.util.Scanner;

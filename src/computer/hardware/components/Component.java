@@ -1,6 +1,6 @@
 package computer.hardware.components;
 
-public interface Components {
+public interface Component {
 
     String getName();
     ComponentType getType();

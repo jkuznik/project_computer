@@ -8,21 +8,21 @@ public enum MenuOption {
 
     ADD_USB_DEVICE("1" , MenuIndicator.USB_MENU),
     REMOVE_USB_DEVICE("2" , MenuIndicator.USB_MENU),
-    LIST_USB_DEVICES("3",MenuIndicator.USB_MENU),
+    LIST_USB_DEVICES("3", MenuIndicator.USB_MENU),
 
     ADD_FILE("1" , MenuIndicator.FILE_MENU),
     REMOVE_FILE("2" , MenuIndicator.FILE_MENU),
     FIND_FILE("3" , MenuIndicator.FILE_MENU),
-    LIST_ALL_FILES("4",MenuIndicator.FILE_MENU),
+    LIST_ALL_FILES("4", MenuIndicator.FILE_MENU),
 
-    ADD_HARDWARE("1",MenuIndicator.HARDWARE_MENU),
-    REMOVE_HARDWARE("2",MenuIndicator.HARDWARE_MENU),
-    LIST_HARDWARE("3",MenuIndicator.HARDWARE_MENU),
-    SET_HIGH_MONITOR_RESOLUTION("4",MenuIndicator.HARDWARE_MENU),
-    SET_LOW_MONITOR_RESOLUTION("5",MenuIndicator.HARDWARE_MENU),
-    CHANGE_HEADPHONE_VOLUME("6",MenuIndicator.HARDWARE_MENU),
-    SHOW_CURRENT_HEADPHONE_VOLUME("7",MenuIndicator.HARDWARE_MENU),
-    BACK("back",MenuIndicator.UNIVERSAL),
+    ADD_HARDWARE("1", MenuIndicator.HARDWARE_MENU),
+    REMOVE_HARDWARE("2", MenuIndicator.HARDWARE_MENU),
+    LIST_HARDWARE("3", MenuIndicator.HARDWARE_MENU),
+    SET_HIGH_MONITOR_RESOLUTION("4", MenuIndicator.HARDWARE_MENU),
+    SET_LOW_MONITOR_RESOLUTION("5", MenuIndicator.HARDWARE_MENU),
+    CHANGE_HEADPHONE_VOLUME("6", MenuIndicator.HARDWARE_MENU),
+    SHOW_CURRENT_HEADPHONE_VOLUME("7", MenuIndicator.HARDWARE_MENU),
+    BACK("back", MenuIndicator.UNIVERSAL),
     END("end", MenuIndicator.UNIVERSAL),
     DEFAULT( "default", MenuIndicator.UNIVERSAL);
 

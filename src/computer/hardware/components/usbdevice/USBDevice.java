@@ -1,11 +1,11 @@
 package computer.hardware.components.usbdevice;
 
 import computer.hardware.components.ComponentType;
-import computer.hardware.components.Components;
+import computer.hardware.components.Component;
 
 import java.util.Scanner;
 
-public abstract class USBDevice implements Components {
+public abstract class USBDevice implements Component {
     protected String name;
     protected boolean connected = false;
     protected boolean safeDisconnect = false;

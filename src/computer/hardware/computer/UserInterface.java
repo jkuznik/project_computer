@@ -13,6 +13,8 @@ import computer.software.file.image.GIFImageFile;
 import computer.software.file.image.JPGImageFIle;
 import computer.software.file.music.MP3File;
 import computer.software.file.shared.Capacity;
+import computer.software.file.shared.File;
+import computer.software.file.shared.FileType;
 import computer.utils.ConsoleReader;
 
 import java.util.Scanner;
@@ -106,21 +108,11 @@ public class UserInterface {
             menuOption = MenuOption.chosenAction(consoleReader.readFromConsole().nextLine(), MenuIndicator.FILE_MENU);
 
             switch (menuOption) {
-                case ADD_FILE -> {
-                    System.out.println("Adding file");
-                }
-                case REMOVE_FILE -> {
-                    System.out.println("Removing file");
-                }
-                case FIND_FILE -> {
-                    System.out.println("Finding file");
-                }
-                case LIST_ALL_FILES -> {
-                    computer.listFiles();
-                }
-                case END -> {
-                    System.exit(0);
-                }
+                case ADD_FILE -> addFile();
+                case REMOVE_FILE -> removeFile();
+                case FIND_FILE -> findFile();
+                case LIST_ALL_FILES -> listFiles();
+                case END -> System.exit(0);
                 default -> {
                     if (!menuOption.equals(MenuOption.BACK)) {
                         System.out.println("Wrong option");
@@ -128,6 +120,100 @@ public class UserInterface {
                 }
             }
         } while (!menuOption.equals(MenuOption.BACK));
+    }
+
+    private static void addFile() {
+        FileType typeUserChoice;
+        System.out.println(""" 
+                              Rodzaj pliku:
+                              1. GIF
+                              2. JPEG
+                              3. MP3""");
+
+        typeUserChoice = FileType.chosenAction(consoleReader.readFromConsole().nextLine());
+        if (typeUserChoice == FileType.DEFAULT){
+            System.out.println("Wrong option");
+            return;
+        }
+
+        File file;
+        switch (typeUserChoice){
+            case GIF -> {
+                String fileName;
+                System.out.println("Nazwa pliku:");
+                fileName = consoleReader.readFromConsole().nextLine();
+                int size;
+                System.out.println("Rozmiar pliku:");
+                size = consoleReader.readFromConsole().nextInt();
+                consoleReader.readFromConsole().nextLine();
+                file = new GIFImageFile(fileName, size);
+                computer.addFile(file);
+            }
+            case JPEG -> {
+                String fileName;
+                System.out.println("Nazwa pliku:");
+                fileName = consoleReader.readFromConsole().nextLine();
+                int size;
+                System.out.println("Rozmiar pliku:");
+                size = consoleReader.readFromConsole().nextInt();
+                consoleReader.readFromConsole().nextLine();
+                int compression;
+                System.out.println("Poziom kompresji:");
+                compression = consoleReader.readFromConsole().nextInt();
+                consoleReader.readFromConsole().nextLine();
+                file = new JPGImageFIle(fileName, size, compression);
+                computer.addFile(file);
+            }
+            case MP3 -> {
+                String fileName;
+                System.out.println("Nazwa pliku:");
+                fileName = consoleReader.readFromConsole().nextLine();
+                int size;
+                System.out.println("Rozmiar pliku:");
+                size = consoleReader.readFromConsole().nextInt();
+                consoleReader.readFromConsole().nextLine();
+                String bandName;
+                System.out.println("Wykonawca:");
+                bandName = consoleReader.readFromConsole().nextLine();
+                String title;
+                System.out.println("Tytuł:");
+                title = consoleReader.readFromConsole().nextLine();
+                int quality;
+                System.out.println("Jakość:");
+                quality = consoleReader.readFromConsole().nextInt();
+                consoleReader.readFromConsole().nextLine();
+                file = new MP3File(fileName, size, bandName, title, quality);
+                computer.addFile(file);
+            }
+        }
+    }
+
+    private static void removeFile() {
+        computer.listFiles();
+
+        String fileName;
+        System.out.println("Podaj nazwe pliku do usunięcia:");
+        fileName = consoleReader.readFromConsole().nextLine();
+
+        File file = computer.findFile(fileName);
+        computer.removeFile(file);
+    }
+
+    private static void findFile() {
+        String fileName;
+        System.out.println("Podaj nazwe pliku:");
+        fileName = consoleReader.readFromConsole().nextLine();
+
+        File file = computer.findFile(fileName);
+
+        System.out.println("Informacja o pliku " + file.getName());
+        System.out.println("Nazwa: " + file.getName());
+        System.out.println("Rozmiar: " + file.getSize());
+        System.out.println("Typ: " + file.getType());
+    }
+
+    private static void listFiles() {
+        computer.listFiles();
     }
 
     private static void hardwareMenu() {

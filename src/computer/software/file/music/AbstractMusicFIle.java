@@ -15,6 +15,6 @@ public abstract class AbstractMusicFIle extends AbstractFile implements MusicFil
 
     @Override
     public FileType getType() {
-        return FileType.MUSIC;
+        return null;
     }
 }

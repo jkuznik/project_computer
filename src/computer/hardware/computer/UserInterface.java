@@ -13,23 +13,23 @@ import computer.software.file.image.GIFImageFile;
 import computer.software.file.image.JPGImageFIle;
 import computer.software.file.music.MP3File;
 import computer.software.file.shared.Capacity;
+import computer.utils.ConsoleReader;
 
 import java.util.Scanner;
 
 public class UserInterface {
     private static final ComputerAPI computer = Computer.getInstance();
-
+    private static final ConsoleReader consoleReader = ConsoleReader.getInstance();
 
     private static Monitor monitor = new Monitor("Dell");
     private static Drive hddDrive = new HDDDrive("HDDDrive", Capacity.GB64);
     private static Mouse mouse = new Mouse("Mysz");
     private static MemoryStick memoryStick = new MemoryStick("Pendrive", Capacity.GB1);
 
-    private static HeadphonesAPI headphonesAPI = new Headphones();
+    private static HeadphonesAPI headphones= new Headphones();
 
     private static MenuOption menuOption;
     private static ComponentType componentType;
-    private static Scanner scanner = new Scanner(System.in);
 
     public static void displayInterface() {
         computerBootstrap();
@@ -42,7 +42,7 @@ public class UserInterface {
                     3. Hardware
                     4. end <- to exit
                     """);
-            menuOption = MenuOption.chosenAction(scanner.nextLine(), MenuIndicator.MAIN_MENU);
+            menuOption = MenuOption.chosenAction(consoleReader.readFromConsole().nextLine(), MenuIndicator.MAIN_MENU);
 
             switch (menuOption) {
 
@@ -63,7 +63,7 @@ public class UserInterface {
                                 back <- to go back
                                 end <- to exit
                                 """);
-            menuOption = MenuOption.chosenAction(scanner.nextLine(), MenuIndicator.USB_MENU);
+            menuOption = MenuOption.chosenAction(consoleReader.readFromConsole().nextLine(), MenuIndicator.USB_MENU);
 
             switch (menuOption) {
                 case ADD_USB_DEVICE -> {
@@ -103,7 +103,7 @@ public class UserInterface {
                                 back <- to go back
                                 end <- to exit
                                 """);
-            menuOption = MenuOption.chosenAction(scanner.nextLine(), MenuIndicator.FILE_MENU);
+            menuOption = MenuOption.chosenAction(consoleReader.readFromConsole().nextLine(), MenuIndicator.FILE_MENU);
 
             switch (menuOption) {
                 case ADD_FILE -> {
@@ -144,7 +144,7 @@ public class UserInterface {
                                 back <- to go back
                                 end <- to exit
                                 """);
-            menuOption = MenuOption.chosenAction(scanner.nextLine(), MenuIndicator.HARDWARE_MENU);
+            menuOption = MenuOption.chosenAction(consoleReader.readFromConsole().nextLine(), MenuIndicator.HARDWARE_MENU);
 
             switch (menuOption) {
                 case ADD_HARDWARE -> {
@@ -152,10 +152,10 @@ public class UserInterface {
                 }
                 case REMOVE_HARDWARE -> removeComponent();
                 case LIST_HARDWARE -> listHardware();
-                case SET_HIGH_MONITOR_RESOLUTION -> monitor.setHeightResolution();
-                case SET_LOW_MONITOR_RESOLUTION -> monitor.setLowResolution();
-                case CHANGE_HEADPHONE_VOLUME -> headphonesAPI.changeVolume();
-                case SHOW_CURRENT_HEADPHONE_VOLUME -> headphonesAPI.showVolume();
+                case SET_HIGH_MONITOR_RESOLUTION -> setHighMonitorResolution();
+                case SET_LOW_MONITOR_RESOLUTION -> setLowMonitorResolution();
+                case CHANGE_HEADPHONE_VOLUME -> changeHeadphonesVolume();
+                case SHOW_CURRENT_HEADPHONE_VOLUME -> showHeadphonesVolume();
                 case END -> System.exit(0);
 
                 default -> {
@@ -167,10 +167,10 @@ public class UserInterface {
         } while (!menuOption.equals(MenuOption.BACK));
     }
 
-    private static void removeComponent() {
+    private static void removeComponent() { // TODO: rozwinąć tą metodę do wybierania jednego z pośród wszystkich podłączonych, wykorzystać do tego switch-case. Na ten moment sposób działania wymaga poprawnego wprowadzenia danych przez użytkownika
         listHardware();
         System.out.println("Podaj typ urządzenia które chcesz usunąć: ");
-        componentType = ComponentType.valueOf(scanner.nextLine().toUpperCase());
+        componentType = ComponentType.valueOf(consoleReader.readFromConsole().nextLine().toUpperCase());
 
         computer.removeComponent(computer.getComponent(componentType));
     }
@@ -179,7 +179,35 @@ public class UserInterface {
         computer.getComponents().forEach(component -> System.out.println(component.getName() + " \t" + component.getType()));
     }
 
-    private static void computerBootstrap() {
+    private static void setHighMonitorResolution() {
+        Component component = computer.getComponent(ComponentType.MONITOR);
+        Monitor monitor1 = (Monitor) component;
+
+        monitor1.setHeightResolution();
+    }
+
+    private static void setLowMonitorResolution() {
+        Component component = computer.getComponent(ComponentType.MONITOR);
+        Monitor monitor1 = (Monitor) component;
+
+        monitor1.setLowResolution();
+    }
+
+    private static void changeHeadphonesVolume() {
+        Component component = computer.getComponent(ComponentType.MONITOR);
+        headphones = (Headphones) component;
+
+        headphones.changeVolume();
+    }
+
+    private static void showHeadphonesVolume() {
+        Component component = computer.getComponent(ComponentType.MONITOR);
+        headphones = (Headphones) component;
+
+        headphones.showVolume();
+    }
+
+    private static void computerBootstrap() {   // ta metoda pozwala na wstępną konfiguracji komputera bez konieczności robienia tego każdorazowo od zera z poziomu ui
         computer.addComponent(monitor);
         computer.addComponent(hddDrive);
         computer.addComponent(mouse);

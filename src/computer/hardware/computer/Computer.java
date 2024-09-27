@@ -2,10 +2,7 @@ package computer.hardware.computer;
 
 import computer.hardware.components.Component;
 import computer.hardware.components.ComponentType;
-import computer.hardware.components.headphones.Headphones;
-import computer.hardware.components.Monitor;
 import computer.hardware.components.drive.Drive;
-import computer.hardware.components.usbdevice.MemoryStick;
 import computer.software.file.shared.File;
 import computer.hardware.components.usbdevice.USBDevice;
 import computer.software.file.shared.FileNotFoundException;

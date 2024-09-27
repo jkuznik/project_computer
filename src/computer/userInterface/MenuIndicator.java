@@ -1,4 +1,4 @@
-package computer.hardware.computer;
+package computer.userInterface;
 
 public class MenuIndicator {
     public static final String MAIN_MENU = "Main Menu";

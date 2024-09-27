@@ -1,14 +1,15 @@
-package computer.hardware.computer;
+package computer.userInterface;
 
 import computer.hardware.components.Component;
 import computer.hardware.components.ComponentType;
-import computer.hardware.components.Monitor;
+import computer.hardware.components.monitor.Monitor;
 import computer.hardware.components.drive.Drive;
 import computer.hardware.components.drive.HDDDrive;
 import computer.hardware.components.headphones.Headphones;
-import computer.hardware.components.headphones.HeadphonesAPI;
 import computer.hardware.components.usbdevice.MemoryStick;
 import computer.hardware.components.usbdevice.Mouse;
+import computer.hardware.computer.Computer;
+import computer.hardware.computer.ComputerAPI;
 import computer.software.file.image.GIFImageFile;
 import computer.software.file.image.JPGImageFIle;
 import computer.software.file.music.MP3File;
@@ -17,21 +18,11 @@ import computer.software.file.shared.File;
 import computer.software.file.shared.FileType;
 import computer.utils.ConsoleReader;
 
-import java.util.Scanner;
-
 public class UserInterface {
     private static final ComputerAPI computer = Computer.getInstance();
     private static final ConsoleReader consoleReader = ConsoleReader.getInstance();
 
-    private static Monitor monitor = new Monitor("Dell");
-    private static Drive hddDrive = new HDDDrive("HDDDrive", Capacity.GB64);
-    private static Mouse mouse = new Mouse("Mysz");
-    private static MemoryStick memoryStick = new MemoryStick("Pendrive", Capacity.GB1);
-
-    private static HeadphonesAPI headphones= new Headphones();
-
     private static MenuOption menuOption;
-    private static ComponentType componentType;
 
     public static void displayInterface() {
         computerBootstrap();
@@ -256,7 +247,7 @@ public class UserInterface {
     private static void removeComponent() { // TODO: rozwinąć tą metodę do wybierania jednego z pośród wszystkich podłączonych, wykorzystać do tego switch-case. Na ten moment sposób działania wymaga poprawnego wprowadzenia danych przez użytkownika
         listHardware();
         System.out.println("Podaj typ urządzenia które chcesz usunąć: ");
-        componentType = ComponentType.valueOf(consoleReader.readFromConsole().nextLine().toUpperCase());
+        ComponentType componentType = ComponentType.valueOf(consoleReader.readFromConsole().nextLine().toUpperCase());
 
         computer.removeComponent(computer.getComponent(componentType));
     }
@@ -281,19 +272,24 @@ public class UserInterface {
 
     private static void changeHeadphonesVolume() {
         Component component = computer.getComponent(ComponentType.MONITOR);
-        headphones = (Headphones) component;
+        Headphones headphones = (Headphones) component;
 
         headphones.changeVolume();
     }
 
     private static void showHeadphonesVolume() {
         Component component = computer.getComponent(ComponentType.MONITOR);
-        headphones = (Headphones) component;
+        Headphones headphones = (Headphones) component;
 
         headphones.showVolume();
     }
 
     private static void computerBootstrap() {   // ta metoda pozwala na wstępną konfiguracji komputera bez konieczności robienia tego każdorazowo od zera z poziomu ui
+        Monitor monitor = new Monitor("Dell");
+        Drive hddDrive = new HDDDrive("HDDDrive", Capacity.GB64);
+        Mouse mouse = new Mouse("Mysz");
+        MemoryStick memoryStick = new MemoryStick("Pendrive", Capacity.GB1);
+
         computer.addComponent(monitor);
         computer.addComponent(hddDrive);
         computer.addComponent(mouse);

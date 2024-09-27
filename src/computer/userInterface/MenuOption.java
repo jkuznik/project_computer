@@ -1,4 +1,4 @@
-package computer.hardware.computer;
+package computer.userInterface;
 
 public enum MenuOption {
 

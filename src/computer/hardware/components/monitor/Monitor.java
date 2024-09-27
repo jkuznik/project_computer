@@ -1,4 +1,7 @@
-package computer.hardware.components;
+package computer.hardware.components.monitor;
+
+import computer.hardware.components.Component;
+import computer.hardware.components.ComponentType;
 
 public class Monitor implements Component {
     private final String name;

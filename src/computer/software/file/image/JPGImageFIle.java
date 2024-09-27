@@ -1,6 +1,9 @@
 package computer.software.file.image;
 
-public class JPGImageFIle extends AbstractImageFIle {
+import computer.software.file.shared.AbstractFile;
+import computer.software.file.shared.FileType;
+
+public class JPGImageFIle extends AbstractFile {
     private final int compression;
 
     public JPGImageFIle(String name, int size, int compression) {
@@ -15,4 +18,8 @@ public class JPGImageFIle extends AbstractImageFIle {
         System.out.println("Showing Image");
     }
 
+    @Override
+    public FileType getType() {
+        return FileType.JPEG;
+    }
 }

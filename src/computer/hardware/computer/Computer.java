@@ -25,36 +25,6 @@ public class Computer implements ComputerAPI{
         return instance;
     }
 
-//    public Monitor getMonitor() {
-//        for (Component component : components) {
-//            if (component instanceof Monitor) {
-//                return (Monitor) component;
-//            }
-//        }
-//        throw new RuntimeException("No component found");
-//    }
-
-//    public Headphones getHeadphones() {
-//        for (Component component : components) {
-//            if (component instanceof Headphones) {
-//                return (Headphones) component;
-//            }
-//        }
-//        throw new RuntimeException("No component found");
-//    }
-
-
-//    public MemoryStick getMemoryStickByName(String name){
-//        List<USBDevice> usbDevices = getUSBDevices();
-//        for (USBDevice usbDevice : usbDevices) {
-//            if (usbDevice instanceof MemoryStick) {
-//                if ( usbDevice.getName().equals(name) ) {
-//                    return (MemoryStick) usbDevice;
-//                }
-//            }
-//        }
-//        throw new RuntimeException("Memory stick '" + name + "' device not found");
-//    }
     @Override
     public void addComponent(Component component) {
         components.add(component);

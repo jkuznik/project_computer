@@ -113,6 +113,8 @@ public class UserInterface {
         } while (!menuOption.equals(MenuOption.BACK));
     }
 
+    //TODO: most of those methods are not support 'failure path'
+
     private static void addFile() {
         FileType typeUserChoice;
         System.out.println(""" 

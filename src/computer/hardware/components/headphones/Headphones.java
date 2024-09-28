@@ -2,10 +2,9 @@ package computer.hardware.components.headphones;
 
 import computer.hardware.components.ComponentType;
 import computer.hardware.components.Component;
-
 import java.util.Scanner;
 
-public class Headphones implements Component, HeadphonesAPI{
+public class Headphones implements Component{
 
     private final Scanner scanner = new Scanner(System.in);
     private String name;
@@ -20,7 +19,6 @@ public class Headphones implements Component, HeadphonesAPI{
         return volume;
     }
 
-    @Override
     public void changeVolume() {
         System.out.println("Ustaw głośność słuchawek z zakresu 0 - 100");
 
@@ -44,7 +42,6 @@ public class Headphones implements Component, HeadphonesAPI{
         }while(true);
     }
 
-    @Override
     public void showVolume() {
         System.out.println("Aktualnie ustawiona głośność słuchawek to " + getVolume());
     }
